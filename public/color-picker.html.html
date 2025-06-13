@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Picker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    .color-box {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      margin: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      transition: transform 0.2s;
+    }
+    .color-box:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>Pick a Color</h2>
+  <div id="palette">
+    <div class="color-box" style="background-color: #FF5733;" data-color="#FF5733"></div>
+    <div class="color-box" style="background-color: #33C1FF;" data-color="#33C1FF"></div>
+    <div class="color-box" style="background-color: #28B463;" data-color="#28B463"></div>
+    <div class="color-box" style="background-color: #F1C40F;" data-color="#F1C40F"></div>
+    <div class="color-box" style="background-color: #9B59B6;" data-color="#9B59B6"></div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".color-box").forEach(box => {
+      box.addEventListener("click", () => {
+        const selectedColor = box.getAttribute("data-color");
+        window.parent.postMessage({ type: "color", value: selectedColor }, "*");
+      });
+    });
+  </script>
+</body>
+</html>
